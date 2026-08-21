@@ -23,8 +23,8 @@
 
 - 视觉决策已提升至 [`DESIGN.md`](DESIGN.md)。
 - 行为与流程决策已提升至 [`EXPERIENCE.md`](EXPERIENCE.md)。
-- 参考图片原件保留在 [`imports/reference-dental-healthcare.jpeg`](imports/reference-dental-healthcare.jpeg)。
-- 关键页面参考稿位于 [`mockups/`](mockups/)。
+- 参考图片原件保留在 [`_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/imports/reference-dental-healthcare.jpeg`](_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/imports/reference-dental-healthcare.jpeg)。
+- 关键页面参考稿位于 [`_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/`](_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/)。
 
 ## Update — 2026-08-20
 

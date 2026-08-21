@@ -3,7 +3,7 @@ name: MedPal Patient Mini Program
 status: final
 updated: 2026-08-20
 sources:
-  - imports/reference-dental-healthcare.jpeg
+  - _bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/imports/reference-dental-healthcare.jpeg
 ---
 
 # MedPal — EXPERIENCE.md
@@ -31,7 +31,7 @@ sources:
 
 一级导航固定为：首页 / 找医生 / 预约 / 消息 / 我的，采用参考图式的白色悬浮圆角 Tab。医生详情、日期时间、确认页为临时任务流，不出现在 Tab 中。任务流的返回必须保留用户已选日期、筛选和表单内容；刷新或网络失败后恢复最近一次本地草稿。
 
-→ 关键布局参考：[`mockups/key-home.html`](mockups/key-home.html)、[`mockups/key-booking.html`](mockups/key-booking.html)、[`mockups/key-appointment.html`](mockups/key-appointment.html)。双契约优先于 mockup。
+→ 关键布局参考：[`_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/key-home.html`](_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/key-home.html)、[`_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/key-booking.html`](_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/key-booking.html)、[`_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/key-appointment.html`](_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/mockups/key-appointment.html)。双契约优先于 mockup。
 
 ## Voice and Tone
 

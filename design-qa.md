@@ -2,16 +2,16 @@
 
 ## Source visual truth
 
-- Source image: `/var/folders/gs/wjr71vq94rngv45wmmmbglgc0000gn/T/codex-clipboard-eb851dc9-4af6-44de-a89c-e43593c20141.png`
+- Source image: external clipboard reference, not stored in the repository.
 - Source pixels: 672 × 156 PNG, supplied as the target card reference.
 
 ## Implementation evidence
 
 - Implementation URL: `http://127.0.0.1:8797/`
-- Full browser screenshot: `/private/tmp/medpal-appointment-card.png`
-- Appointment redesign screenshot: `/private/tmp/medpal-appointment-no-action.png`
-- Global typography verification screenshot: `/private/tmp/medpal-font-scaled-home.png`
-- Focused card capture: `/private/tmp/medpal-appointment-no-action-element.png`
+- Full browser screenshot: temporary validation artifact, not stored in the repository.
+- Appointment redesign screenshot: temporary validation artifact, not stored in the repository.
+- Global typography verification screenshot: temporary validation artifact, not stored in the repository.
+- Focused card capture: temporary validation artifact, not stored in the repository.
 - Browser viewport: 430 × 900 CSS px; app phone screen is 375px wide.
 - Focused implementation card: 339 × 117 CSS px; browser screenshot density is 1x.
 - State: 首页 / 下一次预约 / waiting order.
@@ -40,8 +40,8 @@ No actionable P0/P1/P2 differences remain for the requested card restyle.
 
 - Initial implementation used the newer date-block/grid card and did not match the supplied reference hierarchy.
 - Fix applied: replaced the date block with hospital/location/time content, moved the companion avatar to the upper-right, and removed the teal top rule, filled action row, and arrow link.
-- Post-fix evidence: `/private/tmp/medpal-appointment-no-action.png`; interaction and responsive checks passed.
-- Typography update evidence: `/private/tmp/medpal-font-scaled-home.png`; all prototype CSS and inline font sizes were reduced by one scale step, and the 20-40 user typography standard is recorded in `DESIGN.md`.
+- Post-fix evidence: temporary validation artifact, not stored in the repository; interaction and responsive checks passed.
+- Typography update evidence: temporary validation artifact, not stored in the repository; all prototype CSS and inline font sizes were reduced by one scale step, and the 20-40 user typography standard is recorded in `DESIGN.md`.
 
 ## Follow-up polish
 

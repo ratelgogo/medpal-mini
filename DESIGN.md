@@ -88,7 +88,7 @@ components:
     active-orb: '{colors.primary}'
     inactive: '{colors.ink-muted}'
 sources:
-  - imports/reference-dental-healthcare.jpeg
+  - _bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/imports/reference-dental-healthcare.jpeg
 ---
 
 # MedPal — DESIGN.md
@@ -99,7 +99,7 @@ MedPal 是一位清醒、可靠、愿意陪患者把事情讲明白的就医伙�
 
 整体方向改为 **浅雾青绿医疗（Soft Aqua Care）**：大面积近白浅青建立明亮、低压力的阅读环境，明亮青绿色只负责引导行动，白色圆角卡片承载信息，灰青色文字提供稳定阅读。上传的参考图作为主要视觉锚点：浅灰蓝背景、白色圆角设备、轻盈青绿色卡片、圆角悬浮 Tab、医生头像和预约信息都应在成品中一眼可见。
 
-![上传的视觉参考图](imports/reference-dental-healthcare.jpeg)
+![上传的视觉参考图](_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/imports/reference-dental-healthcare.jpeg)
 
 Spines win on conflict：后续 mockup、外部设计稿或图片与本规范冲突时，以本 `DESIGN.md` 和配套 `EXPERIENCE.md` 为准。
 

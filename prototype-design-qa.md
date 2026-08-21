@@ -2,10 +2,10 @@
 
 ## Comparison target
 
-- Source visual truth: `/Users/zhangruofan/Desktop/medpal/Dental App Design _ Doctor mobile app, Doctor appointment app, Healthcare.jpeg`
-- Implementation screenshot: `/Users/zhangruofan/code/ai/medpal/prototype/qa-tab-scaled.png`
-- Active-tab validation screenshot: `/Users/zhangruofan/code/ai/medpal/prototype/qa-tab-orders-active.png`
-- Mobile validation screenshot: `/Users/zhangruofan/code/ai/medpal/prototype/qa-mobile-430.png`
+- Source visual truth: `_bmad-output/planning-artifacts/ux-designs/ux-medpal-2026-08-20/imports/reference-dental-healthcare.jpeg`
+- Implementation screenshot: `prototype/qa-tab-scaled.png`
+- Active-tab validation screenshot: `prototype/qa-tab-orders-active.png`
+- Mobile validation screenshot: `prototype/qa-mobile-430.png`
 - Source pixels: 736 × 552; source is a collage containing three phone states.
 - Implementation pixels: 430 × 900; CSS viewport 430 × 900; default device scale factor. A second responsive check used 375 × 850 CSS pixels.
 - State: MedPal home, with a pending professional companion appointment and the bottom tab visible.
@@ -26,7 +26,7 @@ The implementation preserves the reference's strongest visual relationships: a p
 - Fonts and typography: system sans-serif fallback with compact uppercase kicker labels, dark teal heading hierarchy, and readable Chinese body copy. No critical text is clipped at the validated 430px viewport.
 - Spacing and layout rhythm: 8px-based rhythm with 16px page gutters, soft 16–20px card radii, and a scrollable single-column home flow. The persistent bottom tab remains visible in the validated viewport.
 - Colors and visual tokens: pale blue-gray base, mint/turquoise primary, teal-deep action color, warm neutral disabled rows, and soft teal environmental shadows match the source direction.
-- Image quality and asset fidelity: the hero and companion cards use a real raster portrait asset at `/Users/zhangruofan/code/ai/medpal/prototype/assets/companion-hero.png`; UI icons use the Lucide icon library rather than emoji or CSS-drawn substitutes in the redesigned home.
+- Image quality and asset fidelity: the hero and companion cards use a real raster portrait asset at `prototype/assets/companion-hero.png`; UI icons use the Lucide icon library rather than emoji or CSS-drawn substitutes in the redesigned home.
 - Copy and content: Chinese copy follows the PRD's professional companion semantics. The reference's doctor appointment language is intentionally adapted; only “专业陪诊” is actionable and future service types remain “敬请期待”.
 
 ## Primary interactions tested
