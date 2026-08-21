@@ -10,10 +10,11 @@ const App = {
     const { currentRoute, routeParams } = Store.state;
     const app = document.getElementById('app');
     const remoteBookingRoutes = ['patients', 'patient-new', 'hospitals', 'companions', 'companion-detail', 'order-confirm', 'order-success'];
-    const remoteMedpalRoutes = ['referral', 'companion-list'];
+    const remoteMedpalRoutes = ['referral', 'companion-list', 'messages'];
     const remoteMedpalHeaders = {
       referral: { kicker: 'MEDPAL · REWARDS', subtitle: '好友首单完成，奖励自动到账' },
       'companion-list': { kicker: 'MEDPAL · COMPANIONS', subtitle: '杭州已认证专业陪诊师' },
+      messages: { kicker: 'MEDPAL · INBOX', subtitle: '服务进展、系统提醒与健康消息' },
     };
     const remoteBookingSubtitles = {
       patients: '为家人安排一次安心陪诊',
@@ -54,6 +55,11 @@ const App = {
       case 'profile':
         screenHTML = Screens.profile();
         showTabBar = true;
+        break;
+      case 'messages':
+        screenHTML = Screens.messages();
+        navTitle = '消息';
+        showBack = true;
         break;
       case 'services':
         screenHTML = Screens.services();
@@ -148,7 +154,7 @@ const App = {
 
     if (showTabBar) {
       // Tab routes: wrap screen in a flex container
-      html += `<div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">`;
+      html += `<div class="tab-route-shell">`;
       html += screenHTML;
       html += `</div>`;
       html += this.renderTabBar(currentRoute);
@@ -170,7 +176,14 @@ const App = {
             <button class="remote-booking-back" onclick="App.back()" aria-label="返回">${window.lucide ? '<i data-lucide="chevron-left"></i>' : '‹'}</button>
             <div><p>${medpalHeader.kicker}</p><h1>${navTitle}</h1><span>${medpalHeader.subtitle}</span></div>
           </header>
-          <main class="remote-booking-content ${currentRoute === 'companion-list' ? 'remote-companion-list-content' : 'remote-referral-content'} screen-enter">${screenHTML}</main>
+          <main class="remote-booking-content ${currentRoute === 'companion-list' ? 'remote-companion-list-content' : currentRoute === 'messages' ? 'remote-message-content' : 'remote-referral-content'} screen-enter">${screenHTML}</main>
+        </div>
+      `;
+    } else if (currentRoute === 'order-detail') {
+      html += `
+        <div class="order-detail-shell">
+          <button class="order-detail-back" onclick="App.back()" aria-label="返回">${window.lucide ? '<i data-lucide="chevron-left"></i>' : '‹'}</button>
+          <div class="wx-content order-detail-content screen-enter">${screenHTML}</div>
         </div>
       `;
     } else {
@@ -1123,15 +1136,46 @@ Screens.companionDetail = function(id) {
   const c = Store.getCompanion(id);
   if (!c) return '<div class="empty-state"><div class="empty-text">陪诊师不存在</div></div>';
 
+  const metaById = {
+    c1: { years: '3年+', orders: '1268', reviews: '368', rating: '4.9' },
+    c2: { years: '5年+', orders: '742', reviews: '216', rating: '4.8' },
+    c3: { years: '2年+', orders: '516', reviews: '154', rating: '4.8' },
+    c4: { years: '4年+', orders: '936', reviews: '281', rating: '4.9' },
+  };
+  const meta = metaById[c.id] || { years: '3年+', orders: '500', reviews: '160', rating: '4.8' };
+  const requestedDate = Store.state.routeParams?.detailDate;
+  const selectedSlot = c.availableSlots.find(slot => slot.date === requestedDate) || c.availableSlots[0] || { date: '', times: [] };
+  const selectedTime = Store.state.routeParams?.detailDate === selectedSlot.date ? Store.state.routeParams?.detailTime : null;
+  const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  const dateOptions = c.availableSlots.map(slot => {
+    const date = new Date(`${slot.date}T00:00:00`);
+    const selected = slot.date === selectedSlot.date;
+    return `<button type="button" class="remote-companion-date-option${selected ? ' selected' : ''}" onclick="App.selectCompanionDetailDate('${c.id}', '${slot.date}')"><span>${weekdays[date.getDay()]}</span><strong>${date.getDate()}</strong><small>${date.getMonth() + 1}月</small></button>`;
+  }).join('');
+  const timeOptions = selectedSlot.times.map(time => {
+    const exactTime = bookingHourFromRange(time) || time;
+    return `<button type="button" class="remote-time-option remote-companion-detail-time${selectedTime === exactTime ? ' selected' : ''}" onclick="App.selectCompanionSlotDirect('${c.id}', '${selectedSlot.date}', '${time}')">${exactTime}</button>`;
+  }).join('');
+
   return `
     <div class="remote-companion-detail-page">
       <section class="remote-companion-profile">
-        <div class="remote-companion-profile-top">
-          <span class="remote-companion-profile-avatar"><img src="assets/${c.gender === '男' ? 'avatar-default-male.png' : 'avatar-default-female.png'}" alt="${c.name}默认头像"></span>
-          <div class="remote-companion-profile-copy"><p>MEDPAL · 专业陪诊</p><h2>${c.name}</h2><span>${c.gender} · ${c.age}岁 · 杭州服务范围</span></div>
+        <div class="remote-companion-profile-hero">
+          <div class="remote-companion-profile-copy">
+            <p>MEDPAL · 专业陪诊</p>
+            <h2>${c.name}</h2>
+            <div class="remote-companion-profile-price"><strong>¥${MOCK_DATA.pricing.hourlyRate}</strong><span>/小时</span></div>
+            <span>${c.gender} · ${c.age}岁 · 杭州服务范围</span>
+          </div>
+          <div class="remote-companion-profile-photo"><img src="assets/${c.gender === '男' ? 'avatar-default-male.png' : 'avatar-default-female.png'}" alt="${c.name}默认头像"></div>
           <span class="remote-companion-profile-badge"><i data-lucide="badge-check"></i>已认证</span>
         </div>
-        <div class="remote-companion-profile-stats"><span><strong>已认证</strong><small>实名认证</small></span><span><strong>专业陪诊</strong><small>服务类型</small></span><span><strong>杭州</strong><small>服务范围</small></span></div>
+        <div class="remote-companion-profile-stats">
+          <span><strong>${meta.years}</strong><small>陪诊经验</small></span>
+          <span><strong>${meta.orders}</strong><small>已服务</small></span>
+          <span><strong>${meta.reviews}</strong><small>服务评价</small></span>
+          <span><strong>${meta.rating}</strong><small>综合评分</small></span>
+        </div>
       </section>
 
       <section class="remote-companion-detail-card">
@@ -1144,28 +1188,43 @@ Screens.companionDetail = function(id) {
         <p class="remote-companion-introduction">${c.intro}</p>
       </section>
 
-      <section class="remote-companion-detail-card remote-companion-availability-card">
+      <section class="remote-companion-availability-card">
         <div class="remote-companion-detail-section-heading"><div><h2>可预约时间</h2><span>请选择一个整点开始服务</span></div><i data-lucide="calendar-days"></i></div>
-        <div class="remote-companion-availability-list">
-          ${c.availableSlots.map(slot => `
-            <div class="remote-companion-availability-day">
-              <div class="remote-companion-day-label"><strong>${formatDate(slot.date)}</strong><small>可预约</small></div>
-              <div class="remote-companion-detail-time-grid">${slot.times.map(t => `<button class="remote-companion-detail-time" onclick="App.selectCompanionSlotDirect('${c.id}', '${slot.date}', '${t}')">${bookingHourFromRange(t) || t}</button>`).join('')}</div>
-            </div>
-          `).join('')}
+        <div class="remote-companion-date-rail" aria-label="可预约日期">
+          ${dateOptions}
         </div>
+        <div class="remote-companion-time-panel">
+          <div class="remote-companion-time-heading"><strong>选择时间点</strong><span>${formatDate(selectedSlot.date)}</span></div>
+          <div class="remote-time-grid remote-companion-detail-time-grid">
+            ${timeOptions || '<p class="remote-companion-no-time">当天暂无可预约时间，请选择其他日期。</p>'}
+          </div>
+        </div>
+        ${selectedTime ? `<button type="button" class="remote-companion-detail-book" onclick="App.bookCompanionDetailSlot('${c.id}', '${selectedSlot.date}', '${selectedTime}')">立即预约 <i data-lucide="arrow-right"></i></button>` : ''}
       </section>
 
-      <div class="remote-companion-detail-note"><i data-lucide="info"></i><span>选择时间后会返回确认页，你还可以继续调整服务时长和支付方式。</span></div>
+      <div class="remote-companion-detail-note"><i data-lucide="info"></i><span>选择时间后点击立即预约进入确认页，你还可以继续调整服务时长和支付方式。</span></div>
     </div>
   `;
 };
 
+App.selectCompanionDetailDate = function(companionId, date) {
+  const companion = Store.getCompanion(companionId);
+  if (!companion || !companion.availableSlots.some(slot => slot.date === date)) return;
+  Store.state.routeParams = { ...Store.state.routeParams, id: companionId, detailDate: date, detailTime: null };
+  Store.notify();
+};
+
 App.selectCompanionSlotDirect = function(companionId, date, time) {
+  const exactTime = bookingHourFromRange(time) || time;
+  Store.state.routeParams = { ...Store.state.routeParams, id: companionId, detailDate: date, detailTime: exactTime };
+  Store.notify();
+};
+
+App.bookCompanionDetailSlot = function(companionId, date, time) {
   Store.updateDraftOrder({
     companionId,
     serviceDate: date,
-    serviceTime: bookingHourFromRange(time) || time,
+    serviceTime: time,
   });
   App.navigate('order-confirm');
 };

@@ -51,7 +51,7 @@ const RemoteParity = {
               <strong>今天为父亲 ${patient} 安排陪诊</strong>
             </div>
           </div>
-          <button class="remote-icon-button" aria-label="消息通知" onclick="App.showToast('暂无新通知，陪诊师会在服务前 1 天联系您')">
+          <button class="remote-icon-button" aria-label="消息通知" onclick="App.navigate('messages')">
             ${this.icon('bell')}
             <span class="remote-notice-dot"></span>
           </button>
@@ -228,19 +228,48 @@ const RemoteParity = {
     const patients = Store.state.patients;
     return `
       <div class="remote-scroll remote-list-page">
-        ${this.topBar('我的', '账户、就诊人与服务保障')}
         <main class="remote-page-content remote-profile-content">
-          <section class="remote-profile-card"><div class="remote-profile-head"><span class="remote-profile-icon">${this.icon('user-round')}</span><div><strong>陈小雨</strong><p>深圳 · 为杭州家人预约陪诊</p></div><em>已实名</em></div><div class="remote-profile-stats"><span><strong>¥268.5</strong><small>账户余额</small></span><span><strong>3</strong><small>优惠券</small></span><span><strong>¥60</strong><small>邀请奖励</small></span></div></section>
+          <section class="remote-profile-card"><div class="remote-profile-head"><span class="remote-profile-icon">${this.image(DEFAULT_AVATARS.female, '默认女性头像')}</span><div><strong>陈小雨</strong><p>深圳 · 为杭州家人预约陪诊</p></div><em>已实名</em></div><div class="remote-profile-stats"><span><strong>¥268.5</strong><small>账户余额</small></span><span><strong>3</strong><small>优惠券</small></span><span><strong>¥60</strong><small>邀请奖励</small></span></div></section>
           <section class="remote-profile-section"><div class="remote-section-heading"><h2>就诊人管理</h2><button onclick="App.showToast('新增就诊人需完成实名认证（模拟）')">添加</button></div><div class="remote-patient-list">${patients.map((p) => `<div class="remote-patient-row"><span class="remote-small-avatar">${this.image(this.avatarForGender(p.gender), `${p.name}默认头像`)}</span><div><strong>${p.name} · ${p.relationship || p.relation}</strong><p>${p.gender} ${p.age}岁 · ${p.idMasked || '身份信息已保护'}</p></div>${p.age > 80 ? '<em>需人工评估</em>' : ''}</div>`).join('')}</div></section>
           <section class="remote-menu-card">
             <button onclick="App.navigate('records')">${this.icon('file-heart')}<strong>健康档案</strong><span>3 条记录</span>${this.icon('chevron-right')}</button>
             ${[
-            ['wallet-cards', '余额与充值', '¥268.5'], ['ticket', '我的优惠券', '3 张'], ['gift', '邀请有礼', '已获 ¥60'], ['shield-check', '服务保障与保险', '已生效'], ['bell', '消息提醒', ''],
-            ].map((item) => `<button onclick="App.showToast('${item[1]}（原型演示）')">${this.icon(item[0])}<strong>${item[1]}</strong><span>${item[2]}</span>${this.icon('chevron-right')}</button>`).join('')}
+            ['wallet-cards', '余额与充值', '¥268.5'], ['ticket', '我的优惠券', '3 张'], ['gift', '邀请有礼', '已获 ¥60'], ['shield-check', '服务保障与保险', '已生效'], ['bell', '消息提醒', '3 条未读', 'messages'],
+            ].map((item) => `<button onclick="${item[3] ? `App.navigate('${item[3]}')` : `App.showToast('${item[1]}（原型演示）')`}">${this.icon(item[0])}<strong>${item[1]}</strong><span>${item[2]}</span>${this.icon('chevron-right')}</button>`).join('')}
           </section>
           <button class="remote-settings-button" onclick="App.showToast('设置功能开发中')">${this.icon('settings')}<strong>设置</strong>${this.icon('chevron-right')}</button>
           <div class="remote-bottom-space"></div>
         </main>
+      </div>
+    `;
+  },
+
+  messages() {
+    const items = [
+      { kind: '订单进展', icon: 'calendar-check-2', tone: 'teal', title: '陪诊预约已确认', body: '李秀英已确认 8 月 21 日 08:00 的陪诊服务。', time: '今天 14:30', unread: true, route: 'order-detail', id: 'ord-2026-0820-001' },
+      { kind: '服务提醒', icon: 'bell-ring', tone: 'amber', title: '就诊前温馨提醒', body: '请提前准备就诊人身份证和既往检查资料。', time: '昨天 18:20', unread: true },
+      { kind: '健康档案', icon: 'file-heart', tone: 'purple', title: '就医记录已生成', body: '张阿姨本次陪诊记录已整理完成，可前往健康档案查看。', time: '8 月 15 日', unread: false, route: 'records' },
+      { kind: '平台通知', icon: 'gift', tone: 'green', title: '邀请奖励已到账', body: '好友李*华完成首单，¥10 邀请奖励已存入账户。', time: '8 月 10 日', unread: false, route: 'referral' },
+    ];
+    return `
+      <div class="remote-message-page">
+        <section class="remote-message-overview">
+          <div><p>INBOX</p><h2>消息列表</h2><span>服务动态会在这里及时同步</span></div>
+          <button onclick="App.showToast('已全部标记为已读')">全部已读</button>
+        </section>
+        <div class="remote-message-list">
+          ${items.map((item) => {
+            const action = item.route === 'order-detail'
+              ? `App.navigate('order-detail', { id: '${item.id}' })`
+              : item.route ? `App.navigate('${item.route}')` : `App.showToast('${item.title}已标记为已读')`;
+            return `<button class="remote-message-item ${item.unread ? 'unread' : ''} ${item.route ? 'has-action' : ''}" onclick="${action}">
+              <span class="remote-message-icon ${item.tone}">${this.icon(item.icon)}${item.unread ? '<i class="remote-message-dot"></i>' : ''}</span>
+              <span class="remote-message-copy"><small>${item.kind}</small><strong>${item.title}</strong><p>${item.body}</p></span>
+              <time>${item.time}</time>${item.route ? this.icon('chevron-right') : ''}
+            </button>`;
+          }).join('')}
+        </div>
+        <div class="remote-message-note">更多服务通知将在订单状态变化时自动推送</div>
       </div>
     `;
   },
@@ -293,5 +322,6 @@ Screens.home = () => RemoteParity.home();
 Screens.orders = () => RemoteParity.orders();
 Screens.records = () => RemoteParity.records(false);
 Screens.profile = () => RemoteParity.profile();
+Screens.messages = () => RemoteParity.messages();
 Screens.services = () => RemoteParity.services();
 Screens.orderDetail = (id) => RemoteParity.orderDetail(id);

@@ -338,21 +338,25 @@
 
 /* Companion detail page: the same Soft Aqua Care language as booking and confirmation. */
 .remote-companion-detail-page{padding-bottom:2px}
-.remote-companion-profile{margin-bottom:14px;padding:18px;border:1px solid rgba(28,101,104,.07);border-radius:26px;background:linear-gradient(145deg,#effcf9,#fff);box-shadow:0 10px 28px rgba(65,139,137,.1)}
-.remote-companion-profile-top{display:flex;align-items:center;gap:12px;min-width:0}
-.remote-companion-profile-avatar{width:70px;height:70px;display:block;flex:0 0 auto;overflow:hidden;border-radius:24px;background:var(--medpal-mint)}
-.remote-companion-profile-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.remote-companion-profile-copy{min-width:0;flex:1}
+.remote-companion-profile{margin-bottom:16px;overflow:visible;border-radius:28px;background:transparent}
+.remote-companion-profile-hero{position:relative;min-height:208px;margin:-20px -18px 0;overflow:hidden;border-radius:0;background:linear-gradient(138deg,#e9faf7 0%,#d3f0ec 58%,#a5ddd7 100%)}
+.remote-companion-profile-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(233,250,247,.94) 0%,rgba(233,250,247,.72) 39%,rgba(233,250,247,0) 68%)}
+.remote-companion-profile-photo{position:absolute;z-index:1;top:0;right:0;bottom:0;width:58%;overflow:hidden}
+.remote-companion-profile-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
+.remote-companion-profile-copy{position:relative;z-index:2;min-width:0;width:57%;padding:28px 0 28px 20px}
 .remote-companion-profile-copy p{color:#238d89;font-size:9px;font-weight:800;letter-spacing:.12em}
-.remote-companion-profile-copy h2{margin-top:4px;color:var(--medpal-ink);font-size:22px;line-height:1.2}
-.remote-companion-profile-copy>span{display:block;margin-top:5px;overflow:hidden;color:var(--medpal-muted);font-size:11px;text-overflow:ellipsis;white-space:nowrap}
-.remote-companion-profile-badge{display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;padding:6px 8px;border-radius:999px;color:var(--medpal-teal-deep);background:var(--medpal-mint);font-size:10px;font-weight:700;white-space:nowrap}
+.remote-companion-profile-copy h2{margin-top:9px;color:var(--medpal-ink);font-size:24px;line-height:1.18;letter-spacing:-.04em}
+.remote-companion-profile-price{display:flex;align-items:baseline;gap:3px;margin-top:16px;color:var(--medpal-teal-deep)}
+.remote-companion-profile-price strong{font-size:20px;line-height:1}
+.remote-companion-profile-price span{color:var(--medpal-muted);font-size:12px}
+.remote-companion-profile-copy>span{display:block;margin-top:11px;overflow:hidden;color:var(--medpal-muted);font-size:10px;text-overflow:ellipsis;white-space:nowrap}
+.remote-companion-profile-badge{position:absolute;z-index:3;top:14px;right:14px;display:inline-flex;align-items:center;gap:4px;padding:6px 8px;border-radius:999px;color:var(--medpal-teal-deep);background:rgba(255,255,255,.84);font-size:10px;font-weight:700;white-space:nowrap}
 .remote-companion-profile-badge [data-lucide]{width:14px;height:14px}
-.remote-companion-profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:17px;padding:13px;border-radius:18px;background:rgba(90,214,204,.14)}
+.remote-companion-profile-stats{position:relative;z-index:4;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:-28px 12px 0;padding:15px 10px;border:1px solid rgba(255,255,255,.74);border-radius:999px;background:rgba(217,245,241,.96);box-shadow:0 10px 20px rgba(65,139,137,.12);backdrop-filter:blur(10px)}
 .remote-companion-profile-stats span{min-width:0;text-align:center}
 .remote-companion-profile-stats strong,.remote-companion-profile-stats small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.remote-companion-profile-stats strong{color:var(--medpal-ink);font-size:13px}
-.remote-companion-profile-stats small{margin-top:4px;color:var(--medpal-muted);font-size:10px}
+.remote-companion-profile-stats strong{color:var(--medpal-ink);font-size:14px;line-height:1.1}
+.remote-companion-profile-stats small{margin-top:5px;color:var(--medpal-muted);font-size:9px}
 .remote-companion-detail-card{margin-bottom:14px;padding:18px;border:1px solid rgba(28,101,104,.07);border-radius:26px;background:#fff;box-shadow:0 10px 28px rgba(65,139,137,.1)}
 .remote-companion-detail-section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
 .remote-companion-detail-section-heading>div{min-width:0}
@@ -363,24 +367,37 @@
 .remote-companion-tags span{display:inline-flex;align-items:center;gap:4px;padding:7px 9px;border-radius:12px;color:var(--medpal-teal-deep);background:var(--medpal-mint);font-size:11px}
 .remote-companion-tags span [data-lucide]{width:14px;height:14px}
 .remote-companion-introduction{color:var(--medpal-muted);font-size:13px;line-height:1.7}
-.remote-companion-availability-card{padding-bottom:14px}
-.remote-companion-availability-list{display:flex;flex-direction:column;gap:12px}
-.remote-companion-availability-day{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;align-items:start}
-.remote-companion-day-label{display:flex;flex-direction:column;justify-content:center;min-height:66px;padding:8px 6px;border-radius:16px;background:var(--medpal-mint)}
-.remote-companion-day-label strong{color:var(--medpal-ink);font-size:12px;line-height:1.35}
-.remote-companion-day-label small{margin-top:4px;color:var(--medpal-teal-deep);font-size:10px}
+.remote-companion-availability-card{margin-bottom:14px;padding:4px 0 0}
+.remote-companion-date-rail{display:flex;gap:6px;overflow-x:auto;padding:3px 2px 12px;scrollbar-width:none;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+.remote-companion-date-rail::-webkit-scrollbar{display:none}
+.remote-companion-date-option{width:58px;min-width:58px;height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #dcecec;border-radius:18px;color:var(--medpal-muted);background:#fff;font-family:inherit;cursor:pointer;scroll-snap-align:start}
+.remote-companion-date-option span{font-size:10px;line-height:1}
+.remote-companion-date-option strong{display:block;margin-top:4px;color:var(--medpal-ink);font-size:21px;line-height:1}
+.remote-companion-date-option small{margin-top:5px;font-size:9px}
+.remote-companion-date-option.selected{border-color:var(--medpal-teal-deep);color:#fff;background:var(--medpal-teal-deep);box-shadow:0 7px 15px rgba(19,142,147,.18)}
+.remote-companion-date-option.selected strong{color:#fff}
+.remote-companion-date-option.selected small{color:rgba(255,255,255,.82)}
+.remote-companion-time-panel{padding:16px;border-radius:27px;background:#fff;box-shadow:0 10px 26px rgba(65,139,137,.1)}
+.remote-companion-time-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px}
+.remote-companion-time-heading strong{color:var(--medpal-ink);font-size:16px}
+.remote-companion-time-heading span{color:var(--medpal-muted);font-size:11px}
 .remote-companion-detail-time-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .remote-companion-detail-time{min-height:48px;border:1px solid #dcecec;border-radius:16px;color:var(--medpal-teal-deep);background:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.remote-companion-detail-time.selected{border:2px solid var(--medpal-teal);color:var(--medpal-teal-deep);background:var(--medpal-mint);box-shadow:0 6px 14px rgba(36,185,178,.12)}
 .remote-companion-detail-time:active{transform:scale(.98);background:var(--medpal-mint)}
+.remote-companion-no-time{grid-column:1/-1;padding:8px 0;color:var(--medpal-muted);font-size:12px;line-height:1.6}
+.remote-companion-detail-book{width:100%;min-height:52px;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;border:0;border-radius:999px;color:#fff;background:linear-gradient(90deg,var(--medpal-teal) 0%,var(--medpal-teal-deep) 100%);font-family:inherit;font-size:15px;font-weight:800;box-shadow:0 9px 18px rgba(19,142,147,.2);cursor:pointer}
+.remote-companion-detail-book [data-lucide]{width:18px;height:18px}
+.remote-companion-detail-book:active{transform:scale(.98)}
 .remote-companion-detail-note{display:flex;align-items:flex-start;gap:7px;margin:0 3px;color:var(--medpal-muted);font-size:11px;line-height:1.55}
 .remote-companion-detail-note [data-lucide]{width:16px;height:16px;flex:0 0 auto;color:var(--medpal-teal-deep)}
-@media(max-width:360px){.remote-companion-profile,.remote-companion-detail-card{padding:16px;border-radius:24px}.remote-companion-profile-avatar{width:64px;height:64px;border-radius:21px}.remote-companion-profile-copy h2{font-size:20px}.remote-companion-profile-badge{padding:5px 6px;font-size:9px}.remote-companion-availability-day{grid-template-columns:82px minmax(0,1fr);gap:8px}.remote-companion-detail-time-grid{gap:7px}.remote-companion-detail-time{min-height:46px;font-size:12px}}
+@media(max-width:360px){.remote-companion-profile-hero{min-height:198px;margin:-16px -13px 0}.remote-companion-profile-copy{padding:25px 0 25px 16px}.remote-companion-profile-copy h2{font-size:21px}.remote-companion-profile-stats{margin:-25px 9px 0;padding:13px 7px}.remote-companion-profile-stats strong{font-size:12px}.remote-companion-profile-stats small{font-size:8px}.remote-companion-detail-card{padding:16px;border-radius:24px}.remote-companion-time-panel{padding:14px;border-radius:24px}.remote-companion-date-option{width:54px;min-width:54px}.remote-companion-detail-time-grid{gap:7px}.remote-companion-detail-time{min-height:46px;font-size:12px}.remote-companion-detail-book{min-height:50px;font-size:14px}}
 
 /* Referral page: a calm rewards flow instead of the legacy orange mini-program banner. */
 .remote-referral-header{background:linear-gradient(160deg,#eefbf9,#d8f2ef)}
-.remote-referral-content{padding-top:18px}
+.remote-referral-content{padding-top:0}
 .remote-referral-page{padding-bottom:2px}
-.remote-referral-hero{position:relative;overflow:hidden;margin-bottom:14px;padding:21px 18px 16px;border:1px solid rgba(28,101,104,.07);border-radius:28px;color:var(--medpal-ink);background:linear-gradient(145deg,#dff8f2 0%,#b7e8e1 56%,#8dd6d1 100%);box-shadow:0 12px 28px rgba(65,139,137,.13)}
+.remote-referral-hero{position:relative;overflow:hidden;margin:0 -18px 14px;padding:21px 18px 16px;border:0;border-radius:0 0 28px 28px;color:var(--medpal-ink);background:linear-gradient(145deg,#dff8f2 0%,#b7e8e1 56%,#8dd6d1 100%)}
 .remote-referral-hero:after{content:"";position:absolute;width:190px;height:190px;right:-86px;top:-80px;border-radius:50%;background:rgba(255,255,255,.24)}
 .remote-referral-hero-copy{position:relative;z-index:1;max-width:245px}
 .remote-referral-hero-copy p{color:rgba(23,77,83,.62);font-size:9px;font-weight:800;letter-spacing:.14em}
@@ -441,7 +458,7 @@
 .remote-referral-withdraw> [data-lucide]{width:18px;height:18px;flex:0 0 auto;color:#aababa}
 .remote-referral-note{display:flex;align-items:flex-start;gap:7px;margin:0 3px;color:var(--medpal-muted);font-size:10px;line-height:1.55}
 .remote-referral-note [data-lucide]{width:16px;height:16px;flex:0 0 auto;color:var(--medpal-success,#2ca98d)}
-@media(max-width:360px){.remote-referral-card{padding:16px;border-radius:24px}.remote-referral-hero{padding:19px 16px 14px;border-radius:24px}.remote-referral-hero-copy h2{font-size:20px}.remote-referral-gift{top:17px;right:15px;width:52px;height:52px;border-radius:18px}.remote-referral-gift [data-lucide]{width:26px;height:26px}.remote-referral-metrics{margin-top:17px}.remote-referral-code-row strong{font-size:17px}.remote-referral-actions{gap:7px}.remote-referral-actions button{font-size:11px}}
+@media(max-width:360px){.remote-referral-card{padding:16px;border-radius:24px}.remote-referral-hero{margin:0 -13px 14px;padding:19px 16px 14px;border-radius:0 0 24px 24px}.remote-referral-hero-copy h2{font-size:20px}.remote-referral-gift{top:17px;right:15px;width:52px;height:52px;border-radius:18px}.remote-referral-gift [data-lucide]{width:26px;height:26px}.remote-referral-metrics{margin-top:17px}.remote-referral-code-row strong{font-size:17px}.remote-referral-actions{gap:7px}.remote-referral-actions button{font-size:11px}}
 
 /* All companions page: inspired by the remote Lovable escort list, adapted to the local time-first flow. */
 .remote-companion-list-content{padding-top:20px}
